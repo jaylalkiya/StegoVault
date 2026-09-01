@@ -8,7 +8,9 @@
  ███████    ██    ███████  ██████   ██████   V A U L T
 ```
 
-**Hide a message so it cannot be read — and so nobody knows it is there.**
+# StegoVault
+
+**Hide a message so it cannot be read — and so nobody knows it is there.**<br>
 **Then build the tool that catches you doing it.**
 
 ![python](https://img.shields.io/badge/python-3.9%2B-050805?style=flat-square&color=00ff41)
@@ -61,7 +63,7 @@ Three layers, three different attacks defeated:
 </tr>
 </table>
 
-## How It Works
+## How the Payload Is Built
 
 The secret is already ciphertext before it ever touches a pixel.
 
@@ -84,7 +86,7 @@ plaintext ────────────────► AES-256-GCM encryp
 
 Capacity is `width × height × 3 ÷ 8` — a 12 MP photo hides about 4.5 MB.
 
-## The Detector
+## How Detection Works
 
 `stego/detect.py` implements **RS Analysis** (Fridrich, Goljan & Du, 2001) from
 scratch in NumPy — no SciPy, no ML, no black box. It groups neighbouring pixels,
@@ -145,7 +147,7 @@ Build a standalone Windows binary (no Python needed on the target):
 pip install pyinstaller && pyinstaller StegoVault.spec
 ```
 
-## Layout
+## Project Layout
 
 ```
 app.py            Tkinter GUI - three tabs, threaded so the UI never blocks
@@ -174,7 +176,7 @@ implemented here, which is where the interesting work is.
 - **A PyInstaller .exe is packaging, not protection.** Frozen bytecode decompiles.
 - **Only lossless carriers** (PNG/BMP/TIFF) can hide data. Any format can be analysed.
 
-## Reference
+## References
 
 Fridrich, Goljan & Du, *Reliable Detection of LSB Steganography in Color and
 Grayscale Images*, ACM Multimedia 2001 · NIST SP 800-38D (GCM) · RFC 8018 (PBKDF2)
